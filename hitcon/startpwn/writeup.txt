@@ -1,0 +1,31 @@
+There's a lot of moving pieces here, try to recreate each
+
+First solve it using pwntools in python
+
+Then make start into a service
+
+    socat TCP4-LISTEN:31338,reuseaddr,fork EXEC:"./start"
+
+Confirm the python script works
+
+Now, create a ruby version and confirm it works.
+
+Make the ruby code really small (higher order functions for the win)
+
+When that doesn't work, run the ruby server on its own
+
+    socat TCP4-LISTEN:31337,reuseaddr,fork EXEC:"./server.rb"
+
+Add calls to sleep (not sure if they helped). Observe that z.interact isn't going to work. We get one function
+per call. Let's get some debug info.
+
+    STDERR.reopen(STDOUT)
+
+Look for the flag, we appear to be in the root directory
+
+  ls  /
+  ls  /home/
+  ls  /home/start
+  cat /homt/start/flag
+
+
